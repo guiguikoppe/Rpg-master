@@ -27,7 +27,7 @@ Para publicar depois, arraste a pasta para Netlify Drop, Vercel ou GitHub Pages.
 | Senha | pede a senha (padrão: `mestre`) | livre |
 | Segredos, fichas, finais | ✅ | — |
 
-Troque o modo nas duas teclas do topo da barra lateral. **Ir para jogadores é livre; voltar ao mestre pede a senha.** O conteúdo secreto não é gerado no Modo Jogadores (não é só escondido por CSS), então não adianta abrir o inspetor do navegador.
+O site sempre abre no Modo Jogadores. Troque o modo nas duas teclas do topo da barra lateral. **Ir para jogadores é livre; voltar ao mestre pede a senha.** O conteúdo secreto não é gerado no Modo Jogadores (não é só escondido por CSS), então não adianta abrir o inspetor do navegador.
 
 > Senha padrão: **mestre**. Troque em *Guia rápido → Trocar senha do mestre* antes de deixar a tela com os jogadores.
 

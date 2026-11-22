@@ -11,7 +11,7 @@
   function seed() {
     return {
       v: 1,
-      role: 'gm',            // 'gm' | 'player'
+      role: 'player',        // 'gm' | 'player'
       pin: 'mestre',
       revealed: { clues: {}, places: { vila: true, capela: true } },   // o que já foi mostrado aos jogadores
       checks: {},                            // checklist do guia rápido
@@ -35,6 +35,7 @@
   }
 
   var State = load();
+  State.role = 'player';
 
   function load() {
     try {
