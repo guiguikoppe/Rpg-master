@@ -641,6 +641,17 @@ details.mini.secret > summary { color: var(--blood-soft); }
   .tl-item { grid-template-columns: 82px 20px minmax(0, 1fr); }
   .avatar, .init-score { width: 34px; height: 34px; }
 }
+@media (max-width: 560px) {
+  .sidebar { gap: .7rem; }
+  .role-switch { max-width: none; }
+  .role-btn, .nav-item { min-height: 40px; }
+  .main { padding: .85rem .75rem 1.5rem; }
+  .topbar { align-items: flex-start; gap: .65rem; }
+  .topbar-right { width: 100%; justify-content: space-between; }
+  .view { min-width: 0; }
+  .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: minmax(0, 1fr); }
+  .panel { padding: .85rem .9rem; }
+}
 
 /* ---------------- impressão ---------------- */
 @media print {
