@@ -150,6 +150,15 @@
 
   window.App = App;
 
+  function setMobileMenuOpen(open) {
+    var sidebar = document.querySelector('.sidebar');
+    var toggle = document.getElementById('menu-toggle');
+    if (!sidebar || !toggle) return;
+    sidebar.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  }
+
   /* ---------------- eventos globais ---------------- */
   document.addEventListener('click', function (e) {
     var el = e.target.closest('[data-action]');
@@ -158,8 +167,21 @@
     var act = el.dataset.action;
     if (!act || !Actions[act]) return;
     e.preventDefault();
+    if (el.closest('#mobile-menu')) setMobileMenuOpen(false);
     try { Actions[act](el.dataset.id, el.dataset, el, e); }
     catch (err) { console.error(err); UI.toast('Erro: ' + err.message); }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#nav .nav-item')) setMobileMenuOpen(false);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setMobileMenuOpen(false);
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 940) setMobileMenuOpen(false);
   });
 
   document.addEventListener('change', function (e) {
@@ -181,6 +203,11 @@
   window.addEventListener('hashchange', syncRoute);
 
   /* ---------------- modo mestre / jogador ---------------- */
+  Actions['menu-toggle'] = function () {
+    var toggle = document.getElementById('menu-toggle');
+    setMobileMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  };
+
   Actions['role-player'] = function () {
     Store.setRole('player');
     App.selectedPlace = null;

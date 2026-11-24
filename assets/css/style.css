@@ -76,6 +76,8 @@ p { margin: .5rem 0; }
   overflow-y: auto;
 }
 
+.sidebar-menu { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: .9rem; }
+.menu-toggle { display: none; }
 .brand { display: flex; gap: .75rem; align-items: center; }
 .brand-crest { width: 42px; height: 42px; flex: none; color: var(--gold); filter: drop-shadow(0 0 10px rgba(201, 162, 39, .35)); }
 .brand h1 {
@@ -626,12 +628,34 @@ details.mini.secret > summary { color: var(--blood-soft); }
 }
 @media (max-width: 940px) {
   .app { grid-template-columns: 1fr; }
-  .sidebar { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: .9rem .9rem .7rem; }
-  .nav { flex-direction: row; overflow-x: auto; gap: .25rem; padding-bottom: .3rem; }
-  .nav-section { display: none; }
-  .nav-item { white-space: nowrap; }
-  .sidebar-foot { display: none; }
-  .role-switch { max-width: 260px; }
+  .sidebar {
+    position: sticky; top: 0; z-index: 20; height: auto; display: grid;
+    grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0;
+    border-right: 0; border-bottom: 1px solid var(--line); padding: .65rem .9rem;
+    overflow: visible;
+  }
+  .menu-toggle {
+    display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+    border: 1px solid var(--line); border-radius: 9px; color: var(--gold-bright);
+    background: rgba(0, 0, 0, .35); cursor: pointer;
+  }
+  .menu-toggle svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  .menu-toggle path { transition: transform .18s, opacity .18s; transform-box: fill-box; transform-origin: center; }
+  .sidebar.menu-open .menu-toggle path:first-child { transform: translateY(6px) rotate(45deg); }
+  .sidebar.menu-open .menu-toggle path:nth-child(2) { opacity: 0; }
+  .sidebar.menu-open .menu-toggle path:last-child { transform: translateY(-6px) rotate(-45deg); }
+  .sidebar-menu { display: none; grid-column: 1 / -1; width: 100%; padding-top: .8rem; }
+  .sidebar.menu-open {
+    position: fixed; inset: 0; height: 100vh; height: 100dvh; max-height: 100dvh;
+    align-content: start; grid-template-rows: auto 1fr; overflow-y: auto;
+    background: linear-gradient(180deg, rgba(38, 29, 20, .99), rgba(17, 12, 8, .99));
+  }
+  .sidebar.menu-open .sidebar-menu { display: flex; }
+  .nav { flex-direction: column; overflow: visible; gap: .1rem; padding: 0; }
+  .nav-section { display: block; }
+  .nav-item { min-height: 44px; white-space: normal; }
+  .sidebar-foot { display: grid; }
+  .role-switch { max-width: none; }
   .main { padding: 1rem 1rem 2rem; }
   .combatant { grid-template-columns: 40px minmax(0, 1fr); }
   .combatant .cbt-hp, .combatant .cbt-actions { grid-column: 1 / -1; }
